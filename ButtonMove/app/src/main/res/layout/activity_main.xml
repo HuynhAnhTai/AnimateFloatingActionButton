@@ -8,27 +8,8 @@
     tools:context=".MainActivity"
     tools:ignore="ResAuto">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/ic_launcher_background"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-
-        />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floating_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
     <View
-        android:id="@+id/view_temp"
+        android:id="@+id/view_background_activity_main"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintTop_toTopOf="parent"
@@ -40,47 +21,66 @@
         />
 
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floating_1"
+    <ImageButton
+        android:id="@+id/image_button_menu_activity_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/green"
+        android:src="@drawable/ic_floating_button_menu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="#00000000"
+        />
+
+    <ImageButton
+        android:id="@+id/image_button_filter_activity_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:visibility="invisible"
+        android:src="@drawable/ic_filter"
         app:layout_constraintBottom_toTopOf="@id/guideline4"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toEndOf="@id/guideline7"
-        app:layout_constraintTop_toTopOf="@+id/guideline2" />
+        app:layout_constraintTop_toTopOf="@+id/guideline2"
+        android:background="#00000000"
+        />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floating_2"
+    <ImageButton
+        android:id="@+id/image_button_profile_activity_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/pinky"
+        android:src="@drawable/ic_profile"
         android:visibility="invisible"
         app:layout_constraintStart_toEndOf="@id/guideline7"
-        app:layout_constraintTop_toBottomOf="@id/guideline" />
+        app:layout_constraintTop_toBottomOf="@id/guideline"
+        android:background="#00000000"
+        />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floating_3"
+    <ImageButton
+        android:id="@+id/image_button_list_activity_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/blue"
+        android:src="@drawable/ic_list"
         android:visibility="invisible"
         app:layout_constraintEnd_toStartOf="@id/guideline9"
         app:layout_constraintStart_toEndOf="@id/guideline7"
-        app:layout_constraintTop_toBottomOf="@+id/guideline8" />
+        app:layout_constraintTop_toBottomOf="@+id/guideline8"
+        android:background="#00000000"
+        />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floating_4"
+    <ImageButton
+        android:id="@+id/image_button_attach_activity_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/blueD"
         android:visibility="invisible"
         app:layout_constraintEnd_toStartOf="@id/guideline9"
-        app:layout_constraintTop_toBottomOf="@id/guideline" />
+        app:layout_constraintTop_toBottomOf="@id/guideline"
+        android:src="@drawable/ic_attach"
+        android:background="#00000000"
+        />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floating_5"
+    <ImageButton
+        android:id="@+id/image_button_sound_activity_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/blueD"
@@ -88,10 +88,13 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toStartOf="@id/guideline9"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toTopOf="@+id/guideline2" />
+        app:layout_constraintTop_toTopOf="@+id/guideline2"
+        android:src="@drawable/ic_sound"
+        android:background="#00000000"
+        />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floating_temp_1"
+    <ImageButton
+        android:id="@+id/image_temp_filter_activity_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/green"
@@ -101,8 +104,8 @@
         app:layout_constraintStart_toEndOf="@id/guideline7"
         app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floating_temp_2"
+    <ImageButton
+        android:id="@+id/image_temp_profile_activity_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/pinky"
@@ -110,8 +113,8 @@
         app:layout_constraintStart_toEndOf="@id/guideline7"
         app:layout_constraintTop_toBottomOf="@id/guideline" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floating_temp_3"
+    <ImageButton
+        android:id="@+id/image_temp_list_activity_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/blue"
@@ -120,8 +123,8 @@
         app:layout_constraintStart_toEndOf="@id/guideline7"
         app:layout_constraintTop_toBottomOf="@+id/guideline8" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floating_temp_4"
+    <ImageButton
+        android:id="@+id/image_temp_attach_activity_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/blueD"
@@ -129,8 +132,8 @@
         app:layout_constraintEnd_toStartOf="@id/guideline9"
         app:layout_constraintTop_toBottomOf="@id/guideline" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floating_temp_5"
+    <ImageButton
+        android:id="@+id/image_temp_sound_activity_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/blueD"
@@ -145,7 +148,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.25" />
+        app:layout_constraintGuide_percent="0.2" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline8"
@@ -159,17 +162,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.75" />
-
-    <!--        <androidx.constraintlayout.widget.Guideline-->
-    <!--            android:id="@+id/guideline10"-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:orientation="horizontal"-->
-    <!--            app:layout_constraintGuide_percent="0.7" />-->
-
-
-    <!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+        app:layout_constraintGuide_percent="0.7" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -177,20 +170,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.4" />
-
-    <!--    <androidx.constraintlayout.widget.Guideline-->
-    <!--        android:id="@+id/guideline3"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:orientation="vertical"-->
-    <!--        app:layout_constraintGuide_percent="0.75" />-->
-
-    <!--    <androidx.constraintlayout.widget.Guideline-->
-    <!--        android:id="@+id/guideline2"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:orientation="vertical"-->
-    <!--        app:layout_constraintGuide_percent="0.25" />-->
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline4"
@@ -211,7 +190,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5" />
+        app:layout_constraintGuide_percent="0.45" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
