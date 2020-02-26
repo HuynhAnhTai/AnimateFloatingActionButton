@@ -10,4 +10,6 @@
     <color name="blueD">#3F78BB</color>
     <color name="blackT">#00000000</color>
     <color name="blackD">#60000000</color>
+    <color name="colorBackground">#1C2334</color>
+    <color name="textColorLogin">#F1F0F2</color>
 </resources>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <integer-array name="imagesLoading">
+        <item>@drawable/ic_start_up_1</item>
+        <item>@drawable/ic_start_up_2</item>
+        <item>@drawable/ic_start_up_3</item>
+        <item>@drawable/ic_start_up_4</item>
+        <item>@drawable/ic_start_up_5</item>
+        <item>@drawable/ic_start_up_6</item>
+        <item>@drawable/ic_start_up_7</item>
+        <item>@drawable/ic_start_up_8</item>
+        <item>@drawable/ic_start_up_9</item>
+        <item>@drawable/ic_start_up_10</item>
+        <item>@drawable/ic_start_up_11</item>
+        <item>@drawable/ic_start_up_12</item>
+        <item>@drawable/ic_start_up_13</item>
+        <item>@drawable/ic_start_up_14</item>
+        <item>@drawable/ic_start_up_15</item>
+        <item>@drawable/ic_start_up_16</item>
+        <item>@drawable/ic_start_up_17</item>
+    </integer-array>
+
+</resources>

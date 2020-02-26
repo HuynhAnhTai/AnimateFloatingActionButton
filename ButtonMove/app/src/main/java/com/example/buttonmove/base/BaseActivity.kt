@@ -13,7 +13,7 @@ import androidx.core.content.ContextCompat
 import androidx.vectordrawable.graphics.drawable.ArgbEvaluator
 import com.example.buttonmove.R
 import com.example.buttonmove.constant.Constant
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_menu_button.*
 //base activity to animate image button filter, profile, list, sound, attach and background view
 abstract class BaseActivity: AppCompatActivity() {
     abstract fun getLayoutId(): Int
@@ -53,115 +53,130 @@ abstract class BaseActivity: AppCompatActivity() {
     private var done: Boolean = true
     //check image_button_menu should click
     private var shouldClick: Boolean = true
+    //time to check image_button_menu press and move
+    private val ClickThreshold = 100
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(getLayoutId())
-        //activity main has image button menu, other image button so if ID layout
-        // not R.layout.activity_main, it will anounce by toast
-        if (getLayoutId() == R.layout.activity_main) {
-            //get width and height of screen telephone to limit area image_button_menu can move, and don't
-            // let image_button_menu move out of screen
-            val display = windowManager.defaultDisplay
-            val size = Point()
-            display.getSize(size)
-            width = size.x
-            height = size.y
+        //get width and height of screen telephone to limit area image_button_menu can move, and don't
+        // let image_button_menu move out of screen
+        val display = windowManager.defaultDisplay
+        val size = Point()
+        display.getSize(size)
+        width = size.x
+        height = size.y
 
-            val resourceId = resources.getIdentifier("status_bar_height", "dimen"
-                , "android")
-            if (resourceId > 0) {
-                statusBarHeight = resources.getDimensionPixelSize(resourceId)
-            }
+        val resourceId = resources.getIdentifier("status_bar_height", "dimen"
+            , "android")
+        if (resourceId > 0) {
+            statusBarHeight = resources.getDimensionPixelSize(resourceId)
+        }
 
-            //find Id image button fuctions
-            image_button_menu = findViewById(R.id.image_button_menu_activity_main)
-            image_button_filter = findViewById(R.id.image_button_filter_activity_main)
-            image_button_profile = findViewById(R.id.image_button_profile_activity_main)
-            image_button_list = findViewById(R.id.image_button_list_activity_main)
-            image_button_attach = findViewById(R.id.image_button_attach_activity_main)
-            image_button_sound = findViewById(R.id.image_button_sound_activity_main)
-            //find Id floating action button location
-            image_button_temp_filter = findViewById(R.id.image_temp_filter_activity_main)
-            image_button_temp_profile = findViewById(R.id.image_temp_profile_activity_main)
-            image_button_temp_list = findViewById(R.id.image_temp_list_activity_main)
-            image_button_temp_attach = findViewById(R.id.image_temp_attach_activity_main)
-            image_button_temp_sound = findViewById(R.id.image_temp_sound_activity_main)
-            //find Id view background
-            view_background = findViewById(R.id.view_background_activity_main)
+        //find Id image button fuctions
+        image_button_menu = findViewById(R.id.image_button_menu_activity_main)
+        image_button_filter = findViewById(R.id.image_button_filter_activity_main)
+        image_button_profile = findViewById(R.id.image_button_profile_activity_main)
+        image_button_list = findViewById(R.id.image_button_list_activity_main)
+        image_button_attach = findViewById(R.id.image_button_attach_activity_main)
+        image_button_sound = findViewById(R.id.image_button_sound_activity_main)
+        //find Id floating action button location
+        image_button_temp_filter = findViewById(R.id.image_temp_filter_activity_main)
+        image_button_temp_profile = findViewById(R.id.image_temp_profile_activity_main)
+        image_button_temp_list = findViewById(R.id.image_temp_list_activity_main)
+        image_button_temp_attach = findViewById(R.id.image_temp_attach_activity_main)
+        image_button_temp_sound = findViewById(R.id.image_temp_sound_activity_main)
+        //find Id view background
+        view_background = findViewById(R.id.view_background_activity_main)
 
-            //control image_button_menu when move, press, or release and when image_button_menu is moving, image_button_menu
-            //can't click and it controls by variable shouldClick
-            image_button_menu.setOnTouchListener { view, motionEvent ->
-                if (done) {
-                    when (motionEvent.action) {
-                        MotionEvent.ACTION_MOVE -> {
-                            actionMove(view, motionEvent)
+        //control image_button_menu when move, press, or release and when image_button_menu is moving, image_button_menu
+        //can't click and it controls by variable shouldClick
+        image_button_menu.setOnTouchListener { view, motionEvent ->
+
+            if (done) {
+                var duration:Long = motionEvent.eventTime - motionEvent.downTime
+
+                when (motionEvent.action) {
+                    MotionEvent.ACTION_MOVE -> {
+                        //if time press image_button_menu > ClickThreshold, button won't click, just move
+                        if (duration>ClickThreshold) {
                             shouldClick = false
+                            actionMove(view, motionEvent)
                         }
-                        MotionEvent.ACTION_DOWN -> {
-                            //save position when press image_button_menu
-                            x = motionEvent.x
-                            y = motionEvent.y
-                            shouldClick = true
+                    }
+                    MotionEvent.ACTION_DOWN -> {
+                        //save position when press image_button_menu
+                        x = motionEvent.x
+                        y = motionEvent.y
+                        shouldClick = true
+                    }
+                    MotionEvent.ACTION_UP -> {
+                        //when release if image_button_menu has x > wide/2 so image_button_menu will go to right
+                        // else go to left of screen
+                        if (view.x > width / 2) {
+                            adjusttPositionButtonPrimary(view,width.toFloat() - view.width)
                         }
-                        MotionEvent.ACTION_UP -> {
-                            //when release if image_button_menu has x > wide/2 so image_button_menu will go to right
-                            // else go to left of screen
-                            if (view.x > width / 2) {
-                                view.x = width.toFloat() - view.width
-                            } else if (view.x <= width / 2) {
-                                view.x = 0F
-                            }
-                            // if image_button_menu don't move, we can press image_button_menu to show or hide
-                            // those image button functions
-                            if (shouldClick) {
-                                image_button_menu.performClick()
-                            }
+                        else if (view.x <= width / 2) {
+                            adjusttPositionButtonPrimary(view,0F)
+                        }
+                        // if image_button_menu don't move, we can press image_button_menu to show or hide
+                        // those image button functions
+                        if (shouldClick) {
+                            image_button_menu.performClick()
                         }
                     }
                 }
-                true
             }
-            image_button_menu.setOnClickListener {
-                //if animate have not done, we can't continue click to show or hide
-                // those image button functions
-                if (done) {
-                    done = false
-                    //check image_button_menu is showing or hiding those image button functions
-                    if (!open) {
-                        open = true
-                        //if image_button_menu is pressed to show, first we need set loaction of these image button
-                        // functions to image_button_menu, so that when they animate, they can begin
-                        // at image_button_menu location
-                        setXYImageButton(image_button_filter, image_button_menu)
-                        setXYImageButton(image_button_profile, image_button_menu)
-                        setXYImageButton(image_button_list, image_button_menu)
-                        setXYImageButton(image_button_attach, image_button_menu)
-                        setXYImageButton(image_button_sound, image_button_menu)
-                        //show these floating action buttons functions
-                        showFloatingButtonFuctions()
-                    } else {
-                        open = false
-                        //hide these floating action buttons functions
-                        hideImageButtonFuctions()
-                    }
-                }
-            }
-
-            //if view_backgound is visible and is clicked, we will hide these image buttons functions
-            view_background_activity_main.setOnClickListener {
-                if (done) {
+            true
+        }
+        image_button_menu.setOnClickListener {
+            //if animate have not done, we can't continue click to show or hide
+            // those image button functions
+            if (done) {
+                done = false
+                //check image_button_menu is showing or hiding those image button functions
+                if (!open) {
+                    open = true
+                    //if image_button_menu is pressed to show, first we need set loaction of these image button
+                    // functions to image_button_menu, so that when they animate, they can begin
+                    // at image_button_menu location
+                    setXYImageButton(image_button_filter, image_button_menu)
+                    setXYImageButton(image_button_profile, image_button_menu)
+                    setXYImageButton(image_button_list, image_button_menu)
+                    setXYImageButton(image_button_attach, image_button_menu)
+                    setXYImageButton(image_button_sound, image_button_menu)
+                    //show these floating action buttons functions
+                    showFloatingButtonFuctions()
+                } else {
                     open = false
+                    //hide these floating action buttons functions
                     hideImageButtonFuctions()
                 }
             }
         }
-        else{
-            Toast.makeText(applicationContext,"ID layout is not activity_main",Toast.LENGTH_SHORT).show()
+
+        //if view_backgound is visible and is clicked, we will hide these image buttons functions
+        view_background_activity_main.setOnClickListener {
+            if (done) {
+                open = false
+                hideImageButtonFuctions()
+            }
         }
     }
+
+    //method to ajust button primary when release
+    private fun adjusttPositionButtonPrimary(view: View, position: Float) {
+        view.animate()
+            .x(position)
+            .y(view.y)
+            .setDuration(Constant.timeToAnimate)
+            .withEndAction {
+                view.x = position
+            }
+            .start()
+    }
+
     //function to call functions animateImageButtonShow() to animate show image buttons functions
     // and call changeColorViewBackground() to animate change color background
     private fun showFloatingButtonFuctions() {

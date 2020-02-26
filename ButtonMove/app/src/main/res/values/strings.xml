@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">ButtonMove</string>
+    <string name="user_name">ユーザー名</string>
+    <string name="password">パスワード</string>
+    <string name="login">サインイン</string>
+    <string name="sign_in"><u>新規登録</u></string>
+    <string name="forgot_password_account"><u>アカウント名</u>、 <u>パスワード</u>をお忘れの場合</string>
 </resources>
